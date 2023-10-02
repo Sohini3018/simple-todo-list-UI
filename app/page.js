@@ -20,11 +20,11 @@ const page = () => {
 
   const handleSubmitTask = () => {
     {
-      if (title !== "" && desc !== "") {
+      if (title !=="") {
         setAddTask([...addTask, { title: title, desc: desc }]);
         setTitle("");
         setDesc("");
-      } else alert("Please enter both title and desc");
+      } else alert("Please enter a task");
     }
   };
 
@@ -36,28 +36,28 @@ const page = () => {
   };
 
   return (
-    <div className="flex justify-center mt-10">
-      <div className="bg-[#D5CCFF] flex flex-col justify-center items-center w-3/4 p-10 border-0 rounded-lg">
-        <p className="w-15 text-xl text-[#2B1887] font-bold">
+    <div className="flex justify-center my-10">
+      <div className="bg-[#D5CCFF] flex flex-col justify-center items-center w-3/4 p-10 border-0 rounded-xl">
+        <p className="w-15 text-2xl text-[#2B1887] font-bold">
           Todo List <FontAwesomeIcon icon={faClipboard} />
         </p>
         <div className="flex justify-center items-center m-5 flex-col gap-3 md:flex-row ">
           <input
             type="text"
             placeholder="Add the title"
-            className="bg-[#F4F2FF]"
+            className="bg-[#F4F2FF] p-3 border-2 border-gray-400 rounded-lg"
             value={title}
             onChange={handleTitle}
           />
           <input
             type="text"
             placeholder="Add some description"
-            className="bg-[#F4F2FF]"
+            className="bg-[#F4F2FF] p-3 border-2 border-gray-400 rounded-lg"
             value={desc}
             onChange={handleDesc}
           />
           <button
-            className="border-2 border-gray-400 rounded-md p-2"
+            className="text-white bg-pink-400 hover:bg-pink-900 rounded-md p-2"
             onClick={handleSubmitTask}
           >
             Add Task
