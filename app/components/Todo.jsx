@@ -11,7 +11,7 @@ const Todo = ({ task, index, handleDelete }) => {
   return (
     <li className="flex w-[30rem] justify-between items-center bg-[#F4F2FF] border-0 rounded-lg m-5 p-3 flex-col gap-4 md:flex-row md:flex-grow">
       <div className="flex flex-col">
-        <p className={`text-lg ${isDone ? "line-through" : ""}`}>
+        <p className={`text-lg font-bold ${isDone ? "line-through" : ""}`}>
           {task.title}
         </p>
         <p className="text-md text-blue-800">{task.desc}</p>
