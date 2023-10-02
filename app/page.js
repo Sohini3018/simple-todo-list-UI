@@ -36,7 +36,8 @@ const page = () => {
   };
 
   return (
-    <div className="flex justify-center my-10">
+    <div className="h-screen bg-orange-100 py-10">
+    <div className="flex justify-center">
       <div className="bg-[#D5CCFF] flex flex-col justify-center items-center w-3/4 p-10 border-0 rounded-xl">
         <p className="w-15 text-2xl text-[#2B1887] font-bold">
           Todo List <FontAwesomeIcon icon={faClipboard} />
@@ -75,6 +76,7 @@ const page = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
