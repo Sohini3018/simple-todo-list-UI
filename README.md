@@ -82,6 +82,7 @@ git merge main
 - **Don't** create PR on the main branch.
 - **Don't** make PR without creating an issue. First, create an issue and wait for me to assign that to you.
 - **Don't** be afraid to tag me on the issue for clarification.
+- **Don't** make PRs related to the backend.
 - **Don't** make PRs related to README.md, but if you really feel some changes would be helpful drop a mail at sohinismail@gmail.com or DM me on [Linkedin](https://www.linkedin.com/in/sohini-bhattacharjee/).
 
 
