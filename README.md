@@ -82,16 +82,16 @@ git merge main
 - **Don't** create PR on the main branch.
 - **Don't** make PR without creating an issue. First, create an issue and wait for me to assign that to you.
 - **Don't** be afraid to tag me on the issue for clarification.
-- **Don't** make PRs related to README.md, but if you really feel some changes would be helpful drop a mail at sohinismail@gmail.com or DM me on Linkedin.
+- **Don't** make PRs related to README.md, but if you really feel some changes would be helpful drop a mail at sohinismail@gmail.com or DM me on [Linkedin](https://www.linkedin.com/in/sohini-bhattacharjee/).
 
 
 ## Contact Me
 
 If you have any questions, or suggestions, or just want to say hi, feel free to reach out to me:
 
-- **Email**: sohinismail@gmail.com
-- **Twitter**: ([https://twitter.com/SohiniB30])
-- **Connect me on [Linkedin Profile](https://www.linkedin.com/in/sohini-bhattacharjee/)**
+- **Email: sohinismail@gmail.com**
+- **X(Formerly Twitter): [X Handle](https://twitter.com/SohiniB30)**
+- **Connect me on [Linkedin](https://www.linkedin.com/in/sohini-bhattacharjee/)**
 
 ## Merge Your First PR!
 We're not getting physical swags this time but let's not stop us from learning and growing
