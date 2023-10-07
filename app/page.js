@@ -35,6 +35,12 @@ const page = () => {
     setAddTask(updatedTask);
   };
 
+  const handleEdit = (index,editedTitle,editedDesc)=>{
+    const updatedTask = [...addTask];
+    updatedTask[index] = {title: editedTitle, desc: editedDesc};
+    setAddTask(updatedTask);
+  }
+
   return (
     <div className="h-screen bg-orange-100 py-10">
     <div className="flex justify-center">
@@ -58,11 +64,11 @@ const page = () => {
             onChange={handleDesc}
           />
           <button
-            className="text-white bg-pink-400 hover:bg-pink-900 rounded-md p-2"
+            className="flex justify-between items-center text-white bg-pink-400 hover:bg-pink-900 rounded-md p-2 w-[7rem]"
             onClick={handleSubmitTask}
           >
-            Add Task
             <FontAwesomeIcon icon={faAdd} />
+            Add Task
           </button>
         </div>
         {/* showTasks if there is atleast one task available */}
@@ -71,7 +77,7 @@ const page = () => {
         ) : (
           <div>
             {addTask.map((task, i) => {
-              return <Todo task={task} index={i} handleDelete={handleDelete} />;
+              return <Todo task={task} index={i} handleDelete={handleDelete} handleEdit={handleEdit}/>;
             })}
           </div>
         )}
