@@ -21,33 +21,9 @@ const Todo = ({ task, index, handleDelete,handleEdit }) => {
   }
 
   return (
-    <li className="flex w-[30rem] justify-between items-center bg-[#F4F2FF] border-0 rounded-lg m-5 p-3 flex-col gap-4 md:flex-row md:flex-grow">
+    <li className="flex flex-grow justify-between items-center bg-[#F4F2FF] border-0 rounded-lg m-5 p-3 flex-col gap-4 md:flex-row md:flex-grow">
       <div className="flex flex-col">
-        <p className={`text-lg font-bold ${isDone ? "line-through" : ""}`}>
-          {task.title}
-        </p>
-        <p className="text-md text-blue-800">{task.desc}</p>
-      </div>
-
-      <div className="flex justify-between w-[30%]">
-        <button
-          className="text-white bg-[#ecb800] hover:bg-yellow-700 rounded-md p-2"
-          onClick={() => {
-            handletaskDone(index);
-          }}
-        >
-          Done
-        </button>
-        <button
-          className="text-white bg-[#ea4863] hover:bg-red-600 rounded-md p-2"
-          onClick={() => {
-            handleDelete(index);
-          }}
-        >
-          Delete
-        </button>
-        <button onClick={handleToggleEdit}>Edit</button>
-        {toggleEdit && (
+      {toggleEdit? (
         <div className="flex flex-col gap-3 mt-3">
           <input
             type="text"
@@ -70,7 +46,41 @@ const Todo = ({ task, index, handleDelete,handleEdit }) => {
             Save
           </button>
         </div>
-      )}
+      ):(
+        <>
+        <p className={`text-lg font-bold ${isDone ? "line-through" : ""}`}>
+          {task.title}
+        </p>
+        <p className="text-md text-blue-800">{task.desc}</p></>
+      )
+      }
+        
+      </div>
+
+      <div className="flex justify-between gap-4">
+        <button
+          className="text-white bg-[#ecb800] hover:bg-yellow-700 rounded-md p-2"
+          onClick={() => {
+            handletaskDone(index);
+          }}
+        >
+          Done
+        </button>
+        <button
+          className="text-white bg-[#ea4863] hover:bg-red-600 rounded-md p-2"
+          onClick={() => {
+            handleDelete(index);
+          }}
+        >
+          Delete
+        </button>
+        <button
+          className="text-white bg-[#6f87e8] hover:bg-blue-600 rounded-md p-2"
+          onClick={handleToggleEdit}
+        >
+          Edit
+        </button>
+        
       </div>
     </li>
   );
