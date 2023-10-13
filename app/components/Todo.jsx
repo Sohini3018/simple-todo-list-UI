@@ -1,7 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPencil,
+  faTrash,
+  faCircle,
+  faCircleCheck,
+} from "@fortawesome/free-solid-svg-icons";
+
 export const maxTitle = 30;
 
 const Todo = ({ task, index, handleDelete, handleEdit }) => {
@@ -64,23 +70,42 @@ const Todo = ({ task, index, handleDelete, handleEdit }) => {
         ) : (
           <div className="flex flex-col">
             <div className="flex flex-row items-center gap-3">
-              <input
-                type="checkbox"
-                id="done"
-                name="title"
-                className="h-5 w-5 rounded-lg"
-                onClick={() => {
-                  handletaskDone(index);
-                }}
-              />
-              <label
-                for="title"
+              {/* Custom CheckBox */}
+              {isDone ? (
+                <button
+                  onClick={() => {
+                    handleTaskDone();
+                  }}
+                  className="flex items-center"
+                >
+                  <FontAwesomeIcon
+                    icon={faCircleCheck}
+                    className="text-xl text-[#25c925]"
+                  />
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    handleTaskDone();
+                  }}
+                  className="flex items-center"
+                >
+                  <FontAwesomeIcon
+                    icon={faCircle}
+                    beatFade
+                    className="text-xl text-orange-400"
+                  />
+                </button>
+              )}
+
+              <h3
+                htmlFor="done"
                 className={`md:text-xl font-bold ${
                   isDone ? "line-through" : ""
                 }`}
               >
                 {task.title}
-              </label>
+              </h3>
               <button
                 className={`text-pink-400 text-sm ${
                   isDetailsVisible ? "hidden" : "block"
