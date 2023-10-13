@@ -1,10 +1,11 @@
 "use client";
 
+import Todo from "./components/Todo";
 import React, { useState } from "react";
+import { maxTitle, options } from "./components/Todo";
+import { useLocalStorage } from 'react-storage-complete';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faClipboard } from "@fortawesome/free-solid-svg-icons";
-import Todo from "./components/Todo";
-import { maxTitle, options } from "./components/Todo";
 
 const completions = ["Incomplete", "Complete"];
 
@@ -30,7 +31,7 @@ const page = () => {
   const [filter, setFilter] = useState("All");
   const [complete, setComplete] = useState("All");
 
-  const [addTask, setAddTask] = useState([]);
+  const [addTask, setAddTask] = useLocalStorage('allTasks', []);
 
   const [filteredList, setFilteredList] = useState(() => {
     return FilteredTodoIndices(addTask, filter, complete);
@@ -99,6 +100,7 @@ const page = () => {
           <div className="flex justify-center items-center m-5 flex-col gap-3 xl:flex-row w-[70vw] rounded-lg py-4">
             <input
               type="text"
+              name="title"
               placeholder="Add the title"
               className={`bg-[#F4F2FF] w-64 md:w-auto p-3 border-2 rounded-lg ${title.length === maxTitle ? "text-red-500" : ""} focus:outline-none shadow-lg shadow-black/30 focus:shadow-pink-500`}
               value={title}
@@ -106,6 +108,7 @@ const page = () => {
             />
             <input
               type="text"
+              name="description"
               placeholder="Add some description"
               className="bg-[#F4F2FF] w-64 md:w-auto p-3 border-2 rounded-lg focus:outline-none shadow-lg shadow-black/30 focus:shadow-pink-500"
               value={desc}
@@ -114,6 +117,7 @@ const page = () => {
             <h2 className="md:hidden text-pink-500 font-bold text-lg mt-4">Select Task Type</h2>
             <select
               className="appearance-none w-auto bg-[#7f68f0] text-white px-6 py-3 pr-8 rounded-lg shadow-lg shadow-black/30 focus:outline-none focus:shadow-pink-500"
+              name="category-name"
               value={selectedCategory}
               onChange={handleCategory}
             >
@@ -135,15 +139,16 @@ const page = () => {
           </div>
 
           {/* showTasks if there is at least one task available */}
-          <div className="rounded-lg py-8 w-auto md:w-auto md:px-6 mx-3 bg-pink-400 mt-6 flex justify-center">
+          <div className="rounded-lg py-8 md:px-6 mx-3 bg-pink-400 mt-6 flex justify-center">
             {addTask.length == 0 ? (
-              <p className="text-center text-pink-500 md:text-white font-bold px-24">Your Tasks will appear here...</p>
+              <p className="text-center text-white font-bold px-12 md:px-24">Your Tasks will appear here...</p>
             ) : (
               <div className="w-[88%] md:w-full">
                 <h3 className="text-center text-xl md:text-2xl text-white font-extrabold mb-14">{filter} Category Tasks</h3>
                 <div className="flex flex-row justify-between items-center md:mx-8 my-8">
                   <select
                     className="appearance-none max-w-fit bg-white p-2 md:px-6 md:py-3 md:pr-8 rounded-lg shadow-lg shadow-black/30 focus:outline-none focus:shadow-pink-500 mr-4 md:mr-16"
+                    name="category-filter"
                     value={filter}
                     onChange={handleFilter}
                   >
@@ -159,6 +164,7 @@ const page = () => {
 
                   <select
                     className="appearance-none max-w-fit bg-white p-2 md:px-6 md:py-3 md:pr-8 rounded-lg shadow-lg shadow-black/30 focus:outline-none focus:shadow-pink-500 ml-4 md:ml-16"
+                    name="completion-filter"
                     value={complete}
                     onChange={handleCompletions}
                   >

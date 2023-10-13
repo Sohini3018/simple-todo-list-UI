@@ -58,6 +58,7 @@ const Todo = ({ task, index, handleDelete, handleEdit }) => {
           <div className="flex flex-col gap-3 mt-3 w-[62vw] md:w-[40vw]">
             <input
               type="text"
+              name="title"
               placeholder="Edit the title"
               className="bg-[#F4F2FF] w-auto p-2 border-2 border-[#2B1887] rounded-lg"
               value={editedTitle}
@@ -65,6 +66,7 @@ const Todo = ({ task, index, handleDelete, handleEdit }) => {
             />
             <textarea
               rows={3}
+              name="description"
               placeholder="Edit the description"
               className="bg-[#F4F2FF] w-auto p-2 border-2 border-[#2B1887] rounded-lg"
               value={editedDesc}

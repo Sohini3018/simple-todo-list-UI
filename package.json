@@ -16,7 +16,8 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-storage-complete": "^1.1.5"
   },
   "devDependencies": {
     "autoprefixer": "latest",
