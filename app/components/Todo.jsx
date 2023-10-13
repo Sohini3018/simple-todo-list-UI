@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,13 +10,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export const maxTitle = 30;
+export const options = ["Personal", "Study", "Work", "Other"];
 
 const Todo = ({ task, index, handleDelete, handleEdit }) => {
-  const [isDone, setIsDone] = useState(false);
+
+  const [isDone, setIsDone] = useState(task.done);
   const [toggleEdit, setToggleEdit] = useState(false);
   const [isDetailsVisible, setDetailsVisible] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
   const [editedDesc, setEditedDesc] = useState(task.desc);
+  // Category Actions
+  const [editedCategory, setCategory] = useState(task.category);
 
   const handleTitle = (e) => {
     const title_ = e.target.value;
@@ -28,7 +33,8 @@ const Todo = ({ task, index, handleDelete, handleEdit }) => {
     setDetailsVisible(!isDetailsVisible);
   };
 
-  const handletaskDone = () => {
+  const handleTaskDone = () => {
+    handleEdit(index, editedTitle, editedDesc, editedCategory, !isDone);
     setIsDone(!isDone);
   };
 
@@ -37,8 +43,12 @@ const Todo = ({ task, index, handleDelete, handleEdit }) => {
   };
 
   const handleSaveEdit = () => {
-    handleEdit(index, editedTitle, editedDesc);
+    handleEdit(index, editedTitle, editedDesc, editedCategory, isDone);
     setToggleEdit(false);
+  };
+
+  const handleCategory = (e) => {
+    setCategory(e.target.value);
   };
 
   return (
@@ -49,19 +59,30 @@ const Todo = ({ task, index, handleDelete, handleEdit }) => {
             <input
               type="text"
               placeholder="Edit the title"
-              className="bg-[#F4F2FF]  p-2 border-2 border-[#2B1887] rounded-lg"
+              className="bg-[#F4F2FF] w-auto p-2 border-2 border-[#2B1887] rounded-lg"
               value={editedTitle}
               onChange={handleTitle}
             />
             <textarea
               rows={3}
               placeholder="Edit the description"
-              className="bg-[#F4F2FF]  p-2 border-2 border-[#2B1887] rounded-lg"
+              className="bg-[#F4F2FF] w-auto p-2 border-2 border-[#2B1887] rounded-lg"
               value={editedDesc}
               onChange={(e) => setEditedDesc(e.target.value)}
             />
+            <select
+              className="appearance-none w-auto bg-[#7f68f0] text-white p-2 rounded-lg shadow-lg shadow-black/30 focus:outline-none focus:shadow-pink-500"
+              value={editedCategory}
+              onChange={handleCategory}
+            >
+              {options.map((option, index) => (
+                <option key={index} value={option} className="focus:bg-white">
+                  {option} Task
+                </option>
+              ))}
+            </select>
             <button
-              className="text-white bg-green-400 hover:bg-green-700 rounded-md p-2"
+              className="text-white bg-[#25c925] hover:bg-[#329932] rounded-md p-2"
               onClick={handleSaveEdit}
             >
               Save
@@ -131,23 +152,35 @@ const Todo = ({ task, index, handleDelete, handleEdit }) => {
           </div>
         )}
       </div>
-
-      {isDone ? (
-        <button
-          className="text-white rounded-md p-2"
-          onClick={() => {
-            handleDelete(index);
-          }}
-        >
-          <FontAwesomeIcon className="text-red-600" icon={faTrash} />
-        </button>
+      {!toggleEdit ? (
+        <div className="flex flex-row items-center gap-1">
+          <p
+            className={`text-white text-xs p-2 ${
+              isDone ? "bg-red-600" : "bg-[#7f68f0]"
+            } rounded-lg`}
+          >
+            {task.category}
+          </p>
+          {isDone ? (
+            <button
+              className="text-white rounded-md p-2"
+              onClick={() => {
+                handleDelete(index);
+              }}
+            >
+              <FontAwesomeIcon className="text-red-600" icon={faTrash} />
+            </button>
+          ) : (
+            <button
+              className="text-white rounded-md p-2"
+              onClick={handleToggleEdit}
+            >
+              <FontAwesomeIcon className="text-yellow-600" icon={faPencil} />
+            </button>
+          )}
+        </div>
       ) : (
-        <button
-          className="text-white rounded-md p-2"
-          onClick={handleToggleEdit}
-        >
-          <FontAwesomeIcon className="text-yellow-600" icon={faPencil} />
-        </button>
+        <></>
       )}
     </li>
   );
