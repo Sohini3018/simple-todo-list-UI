@@ -1,7 +1,7 @@
 "use client";
 
 import Todo from "./components/Todo";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { maxTitle, options } from "./components/Todo";
 import { useLocalStorage } from 'react-storage-complete';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,8 +21,15 @@ const FilteredTodoIndices = (tasks, filter, complete) => {
     }
   });
 
-  return filteredIndices;
+  const sorted_tasks = filteredIndices.slice().sort((a, b) => (tasks[a].done === tasks[b].done ? 0 : tasks[a].done ? 1 : -1));
+  console.log(sorted_tasks);
+  return sorted_tasks;
 };
+
+const SortTasks = (tasks) => {
+  const sorted_tasks = tasks.slice().sort((a, b) => (a.done === b.done ? 0 : a.done ? 1 : -1));
+  return sorted_tasks;
+}
 
 const page = () => {
   const [title, setTitle] = useState("");
@@ -36,6 +43,11 @@ const page = () => {
   const [filteredList, setFilteredList] = useState(() => {
     return FilteredTodoIndices(addTask, filter, complete);
   });
+
+  useEffect(() => {
+    const sorted_tasks = SortTasks(addTask);
+    setAddTask(sorted_tasks);
+  })
 
   const handleAddTask = () => {
     const updatedTasks = [...addTask, { title: title, desc: desc, category: selectedCategory, done: false }];
